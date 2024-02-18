@@ -184,9 +184,9 @@ public:
 
 private:
 	hittable* hittable_ptr;			// object to be transformed
-	mat4			inverse_matrix;		// inverse transformation matrix
-	mat4			current_matrix; 	// current transformation matrix
-	material* mat;							// material					
+	mat4	  inverse_matrix;		// inverse transformation matrix
+	mat4	  current_matrix; 	    // current transformation matrix
+	material* mat;					// material					
 };
 
 #endif

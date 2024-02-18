@@ -28,16 +28,10 @@
     <ClInclude Include="sphere.h">
       <Filter>Header Files\Geometries</Filter>
     </ClInclude>
-    <ClInclude Include="triangle.h">
-      <Filter>Header Files\Geometries</Filter>
-    </ClInclude>
     <ClInclude Include="tiny_obj_loader.h">
       <Filter>Header Files\Libs</Filter>
     </ClInclude>
     <ClInclude Include="mat4.h">
-      <Filter>Header Files\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="point2D.h">
       <Filter>Header Files\Math</Filter>
     </ClInclude>
     <ClInclude Include="vec3.h">

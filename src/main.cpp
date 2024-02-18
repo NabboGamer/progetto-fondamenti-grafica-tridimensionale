@@ -32,7 +32,7 @@ int init(int width, int height) {
 	}
 
 	/* Create the window where we will draw. */
-	window = SDL_CreateWindow("Phong Shading", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow("Ambient Occlusion", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
 	if (window == nullptr) {
 		cout << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
 		SDL_Quit();
@@ -58,53 +58,28 @@ void close() {
 	SDL_Quit();
 }
 
-int main(int argc, char* argv[])
-{
+int main(int argc, char* argv[]){
 	// World
 	hittable_list world;
 
+	plane* plane_model = new plane();
+	material* plane_material_model = new material(color(0.5f, 0.5f, 0.5f), color(0.5f, 0.5f, 0.5f), color(0.5f, 0.5f, 0.5f), 1.0f);
+	auto plane_instance_ptr = make_shared<instance>(plane_model, plane_material_model);
+	world.add(plane_instance_ptr);
+
+	sphere* sphere_model = new sphere();
+	material* sphere_material_model = new material(color(0.8f, 0.6f, 0.1f), color(0.8f, 0.6f, 0.1f), color(0.8f, 0.6f, 0.1f), 1.0f);
+	auto sphere_instance_ptr = make_shared<instance>(sphere_model, sphere_material_model);
+	sphere_instance_ptr->translate(0.0f, 1.0f, 0.0f);
+	world.add(sphere_instance_ptr);
+
 	color lightgray = color(0.75f, 0.75f, 0.75f);
-	point3 light_position(6.0f, 6.0f, 0.0f);
+	point3 light_position(-5.0f, 10.0f, -10.0f);
 	point_light* worldlight = new point_light(light_position, lightgray, lightgray, lightgray);
 
-	srand(10);
-	
-	sphere* sphere_model = new sphere(); //posizione (0,0,0) e raggio 1.0
-	auto instance_ptr = make_shared<instance>(sphere_model, new material());
-	instance_ptr->scale(1000.0f, 1000.0f, 1000.0f);
-	instance_ptr->translate(0.0f, -1000.0f, 0.0f);
-	instance_ptr->getMaterial()->reflective = 0.5f;
-	world.add(instance_ptr);
-
-	for (int a = -11; a < 11; a++) {
-		for (int b = -11; b < 11; b++) {
-			point3 center(a + 0.9f * random_float(), 0.2f, b + 0.9f * random_float());
-			instance_ptr = make_shared<instance>(sphere_model, new material());
-			instance_ptr->scale(0.2f, 0.2f, 0.2f);
-			instance_ptr->translate(center[0], center[1], center[2]);
-			instance_ptr->getMaterial()->reflective = 0.5f;
-			world.add(instance_ptr);
-		}
-	}
-
-	instance_ptr = make_shared<instance>(sphere_model, new material());
-	instance_ptr->translate(0.0f, 1.0f, 0.0f);
-	instance_ptr->getMaterial()->reflective = 0.2f;
-	world.add(instance_ptr);
-
-	instance_ptr = make_shared<instance>(sphere_model, new material());
-	instance_ptr->translate(-4.0f, 1.0f, 0.0f);
-	instance_ptr->getMaterial()->reflective = 0.5f;
-	world.add(instance_ptr);
-
-	instance_ptr = make_shared<instance>(sphere_model, new material());
-	instance_ptr->translate(4.0f, 1.0f, 0.0f);
-	instance_ptr->getMaterial()->reflective = 1.0f;
-	world.add(instance_ptr);
-
 	camera cam;
-	cam.lookfrom = point3(13, 5, 3);
-	cam.lookat = point3(0, 0, 0);
+	cam.lookfrom = point3(10.0f, 5.0f, 10.0f);
+	cam.lookat = point3(0.0f, 0.5f, 0.0f);
 
 	cam.aspect_ratio = 16.0f / 9.0f;
 	cam.image_width = 960;
@@ -150,7 +125,7 @@ int main(int argc, char* argv[])
 				// cases for other keypresses
 
 			case SDLK_s:
-				saveScreenshotBMP("screenshot.bmp");
+				saveScreenshotBMP("../render/screenshot.bmp");
 				cout << "Screenshot saved!" << endl;
 				break;
 			}
