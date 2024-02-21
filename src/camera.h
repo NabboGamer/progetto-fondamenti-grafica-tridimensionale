@@ -13,6 +13,7 @@
 #include "light.h"
 #include "raster.h"
 #include "shader.h"
+#include "hittable_list.h"
 
 using namespace std;
 using namespace concurrency;
@@ -26,11 +27,11 @@ public:
   int   image_height;       // Rendered image height
   int   samples_per_pixel;  // Count of random samples for each pixel
 
-  float  vfov = 90.0f;                             // Vertical view angle (field of view)
+  float  vfov = 90.0f;                            // Vertical view angle (field of view)
   point3 lookfrom = point3(0.0f, 0.0f, -1.0f);    // Point camera is looking from
   point3 lookat = point3(0.0f, 0.0f, 0.0f);       // Point camera is looking at
   vec3   vup = vec3(0.0f, 1.0f, 0.0f);            // Camera-relative "up" direction
-  point3 camera_center;  // Camera center
+  point3 camera_center;                           // Camera center
 
   camera() {}
 
@@ -76,7 +77,7 @@ public:
   }
 
 
-  void render(hittable_list& world, point_light& worldlight) {
+  /*void render(hittable_list& world, point_light& worldlight) {
     for (int j = 0; j < image_height; ++j) {
       std::clog << "\rScanlines remaining: " << (image_height - j) << ' ' << std::flush;
       for (int i = 0; i < image_width; ++i) {
@@ -93,9 +94,9 @@ public:
       }
     }
     SDL_RenderPresent(renderer);
-  }
+  }*/
 
-  void parallel_render(hittable_list& world, point_light& worldlight) {
+  void parallel_render(hittable_list& world, point_light& worldlight, AmbientOccluder* ambient_occluder_ptr) {
     vector<color> matrix(image_width * image_height);
 
     parallel_for(int(0), image_height, [&](int j) {
@@ -104,7 +105,7 @@ public:
 
         for (int sample = 0; sample < samples_per_pixel; ++sample) {
           ray r = get_ray(i, j);
-          pixel_color += ray_color(r, world, worldlight, 0);
+          pixel_color += ray_color(r, world, worldlight, 0, ambient_occluder_ptr);
         }
 
         pixel_color /= samples_per_pixel;
@@ -148,53 +149,54 @@ private:
     return (px * pixel_delta_u) + (py * pixel_delta_v);
   }
 
-  color ray_color(const ray& r, hittable_list& world, point_light& worldlight, unsigned int depth) {
+  color ray_color(const ray& r, hittable_list& world, point_light& worldlight, unsigned int depth, AmbientOccluder* ambient_occluder_ptr) {
     hit_record rec;
     color colorFinal;
     color reflectColor = color(1.0f, 1.0f, 1.0f);
     color refractColor = color(1.0f, 1.0f, 1.0f);
 
-    if (world.hit(r, interval(0.0f, infinity), rec))
-    {
+    if (world.hit(r, interval(0.0f, infinity), rec)){
       ray shadow_ray(rec.p, unit_vector(worldlight.position - rec.p));
       float closest_light = (rec.p - worldlight.position).length();
 
+      // Se ho colpito l'oggetto allora sparo un raggio nella direzione della luce
       if (world.hit_shadow(shadow_ray, interval(0.01f, closest_light)))
-        colorFinal = ambient_shading(worldlight, rec);
+          // Se colpisce qualche oggetto restituisco la luce ambientale
+          colorFinal = ambient_shading(worldlight, rec);
       else
-        colorFinal = phong_shading(worldlight, rec, camera::camera_center);
-    }
-    else {
+          // Se arriva a colpire la luce restituisco il colore calcolato con il metodo di Phong
+          // Questa riga commentata permette di attivare il Phong Shading
+          /*colorFinal = phong_shading(worldlight, rec, camera::camera_center);*/
+
+          colorFinal = ambient_occluder_ptr->compute_color(world, rec);
+    } else {
       vec3 unit_direction = unit_vector(r.direction());
       float t = 0.5f * (unit_direction.y() + 1.0f);
       return lerp(color(1.0f, 1.0f, 1.0f), color(0.5f, 0.7f, 1.0f), t);
     }
 
-    if (depth < MAX_RAY_DEPTH)
-    {
-      if (rec.m->reflective > 0)
-      {
+    if (depth < MAX_RAY_DEPTH){
+
+      if (rec.m->reflective > 0){
         ray reflectRay;
         reflectRay.d = reflect(-unit_vector(r.d), rec.normal);
         reflectRay.o = rec.p;
         reflectRay.o = reflectRay.at(0.01f);
 
-        reflectColor = ray_color(reflectRay, world, worldlight, depth + 1);
+        reflectColor = ray_color(reflectRay, world, worldlight, depth + 1, ambient_occluder_ptr);
       }
 
-
-      if (rec.m->refractive > 0)
-      {
+      if (rec.m->refractive > 0){
         ray refractRay;
-        if (refract(-unit_vector(r.d), rec.normal, 1.51f, refractRay.d))
-        {
+        if (refract(-unit_vector(r.d), rec.normal, 1.51f, refractRay.d)){
           refractRay.o = rec.p;
           refractRay.o = refractRay.at(0.01f);
 
-          refractColor = ray_color(refractRay, world, worldlight, depth + 1);
+          refractColor = ray_color(refractRay, world, worldlight, depth + 1, ambient_occluder_ptr);
         }
-        else
-          refractColor = color(0.0f, 0.0f, 0.0f);
+        else {
+            refractColor = color(0.0f, 0.0f, 0.0f);
+        }
       }
 
     }

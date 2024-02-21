@@ -41,16 +41,16 @@
       <Filter>Header Files\Math</Filter>
     </ClInclude>
     <ClInclude Include="color.h">
-      <Filter>Header Files\Phong Lighting</Filter>
+      <Filter>Header Files\Shaders</Filter>
     </ClInclude>
     <ClInclude Include="light.h">
-      <Filter>Header Files\Phong Lighting</Filter>
+      <Filter>Header Files\Shaders</Filter>
     </ClInclude>
     <ClInclude Include="material.h">
-      <Filter>Header Files\Phong Lighting</Filter>
+      <Filter>Header Files\Shaders</Filter>
     </ClInclude>
     <ClInclude Include="shader.h">
-      <Filter>Header Files\Phong Lighting</Filter>
+      <Filter>Header Files\Shaders</Filter>
     </ClInclude>
     <ClInclude Include="aabb.h">
       <Filter>Header Files\Spatial Data Structures</Filter>
@@ -69,6 +69,15 @@
     </ClInclude>
     <ClInclude Include="interval.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Random.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiJittered.h">
+      <Filter>Header Files\Samplers</Filter>
+    </ClInclude>
+    <ClInclude Include="Sampler.h">
+      <Filter>Header Files\Samplers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -96,19 +105,31 @@
     <Filter Include="Header Files\Math">
       <UniqueIdentifier>{69ad79b8-1966-43b5-a513-952dc1baf8ed}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Phong Lighting">
-      <UniqueIdentifier>{647f3dcd-c8fc-4b21-910c-026208769391}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Spatial Data Structures">
       <UniqueIdentifier>{eab8419f-0d3d-4d6d-bcc2-b514f67b92b3}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Texture Mapping">
       <UniqueIdentifier>{cc3ca664-f1a0-4081-b1c2-2e54ec8ecdf4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Shaders">
+      <UniqueIdentifier>{647f3dcd-c8fc-4b21-910c-026208769391}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Samplers">
+      <UniqueIdentifier>{859e1ea7-5b0e-4441-a457-a91108c01071}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Samplers">
+      <UniqueIdentifier>{6b05326a-a78f-4a00-b511-1e5a8c2a3d8a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiJittered.cpp">
+      <Filter>Source Files\Samplers</Filter>
+    </ClCompile>
+    <ClCompile Include="Sampler.cpp">
+      <Filter>Source Files\Samplers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

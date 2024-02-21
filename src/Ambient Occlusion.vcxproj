@@ -117,6 +117,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MultiJittered.cpp" />
+    <ClCompile Include="Sampler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -137,9 +139,12 @@
     <ClInclude Include="common.h" />
     <ClInclude Include="mat4.h" />
     <ClInclude Include="mesh.h" />
+    <ClInclude Include="MultiJittered.h" />
     <ClInclude Include="object.h" />
+    <ClInclude Include="Random.h" />
     <ClInclude Include="raster.h" />
     <ClInclude Include="ray.h" />
+    <ClInclude Include="Sampler.h" />
     <ClInclude Include="shader.h" />
     <ClInclude Include="sphere.h" />
     <ClInclude Include="texture.h" />

@@ -20,6 +20,7 @@ using std::sqrt;
 
 const float infinity = std::numeric_limits<float>::infinity();
 const float pi = 3.14159f;
+const float PI = 3.1415926535897932384f;
 
 // Utility Functions
 

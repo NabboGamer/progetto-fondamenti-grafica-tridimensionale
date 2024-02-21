@@ -19,8 +19,9 @@
 #include "camera.h"
 #include "color.h"
 #include "texture.h"
+#include "Multijittered.h"
 
-const unsigned int MAX_RAY_DEPTH = 5;
+const unsigned int MAX_RAY_DEPTH = 0;
 
 using namespace std;
 
@@ -62,6 +63,12 @@ int main(int argc, char* argv[]){
 	// World
 	hittable_list world;
 
+	int num_samples = 64;
+	MultiJittered* sample_ptr = new MultiJittered(num_samples);
+	AmbientOccluder* ambient_occluder_ptr = new AmbientOccluder();
+	ambient_occluder_ptr->set_sampler(sample_ptr);
+
+
 	plane* plane_model = new plane();
 	material* plane_material_model = new material(color(0.5f, 0.5f, 0.5f), color(0.5f, 0.5f, 0.5f), color(0.5f, 0.5f, 0.5f), 1.0f);
 	auto plane_instance_ptr = make_shared<instance>(plane_model, plane_material_model);
@@ -93,12 +100,12 @@ int main(int argc, char* argv[]){
 		return 1;
 	}
 
-	cout << "Image Resolution: " << cam.image_width << "x" << cam.image_height << "\n255\n";
+	cout << "Image Resolution: " << cam.image_width << "x" << cam.image_height << "\n";
 
 	time_t start, end;
 	time(&start);
 
-	cam.parallel_render(world, *worldlight);
+	cam.parallel_render(world, *worldlight, ambient_occluder_ptr);
 	//cam.render(world, *worldlight);
 
 	time(&end);

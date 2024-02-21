@@ -9,11 +9,10 @@
 #include "color.h"
 #include "vec3.h"
 #include "math.h"
+#include "Sampler.h"
 
-inline vec3 reflect(const vec3& i, const vec3& n)
-{
-	//return i - 2.0f * dot(i, n) * n;
-	return  2.0f * dot(i, n) * n - i; // i vettore uscente dalla normale
+inline vec3 reflect(const vec3& i, const vec3& n){
+	return  2.0f * dot(i, n) * n - i; // il vettore uscente dalla normale
 }
 
 inline bool refract(const vec3& v, const vec3& n, float ni_over_nt, vec3& refracted) {
@@ -63,3 +62,68 @@ color ambient_shading(point_light& light, hit_record& hr) {
 
 	return ambient;
 }
+
+class AmbientOccluder{
+
+public:
+
+	AmbientOccluder() {}
+
+
+	void set_sampler(Sampler* s_ptr) {
+		if (sampler_ptr) {
+			delete sampler_ptr;
+			sampler_ptr = nullptr;
+		}
+
+		sampler_ptr = s_ptr;
+		sampler_ptr->map_samples_to_hemisphere(1);
+	}
+
+	vec3 get_direction() {
+		point3 sp = sampler_ptr->sample_hemisphere();
+		return sp.x() * u + sp.y() * v + sp.z() * w;
+	}
+
+	bool in_shadow(const ray& ray, const hittable_list world) const {
+		int num_objects = world.objects.size();
+
+		for (int j = 0; j < num_objects; j++) {
+			if (world.objects[j]->hit_shadow(ray, interval(0.0f, infinity))) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	color compute_color(const hittable_list world, hit_record& hr) {
+		vec3 w = hr.normal;
+		// Il vettore 'up' è leggermente jittered(ovvero gli viene agggiunto del rumore, è agitato letteralmente)
+		// poichè nel caso in cui la normale sia verticale questo aiuta a ottenere un effetto maggiormente realistico
+		vec3 v = cross(w, vec3(0.0072, 1.0f, 0.0034));
+		v = unit_vector(v);
+		vec3 u = cross(v, w);
+
+		ray shadow_ray;
+		shadow_ray.o = hr.p;
+		shadow_ray.d = get_direction();
+
+		if (in_shadow(shadow_ray, world)) {
+			return min_amount * ls * _color;
+		} else {
+			return ls * _color;
+		}
+	}
+
+private:
+
+	float ls = 1.0f;
+	color _color = color(1.0f, 1.0f, 1.0f);
+	float min_amount = 0.0f;
+	vec3 u = vec3(1.0f, 0.0f, 0.0f);
+	vec3 v = vec3(0.0f, 1.0f, 0.0f);
+	vec3 w = vec3(0.0f, 0.0f, 1.0f);
+	Sampler* sampler_ptr = nullptr;
+
+};
