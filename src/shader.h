@@ -82,7 +82,7 @@ public:
 
 	vec3 get_direction() {
 		point3 sp = sampler_ptr->sample_hemisphere();
-		return sp.x() * u + sp.y() * v + sp.z() * w;
+		return sp.x() * u + sp.y() * w + sp.z() * v ;
 	}
 
 	bool in_shadow(const ray& ray, const hittable_list world) const {
@@ -109,10 +109,10 @@ public:
 		shadow_ray.o = hr.p;
 		shadow_ray.d = get_direction();
 
-		if (in_shadow(shadow_ray, world)) {
-			return min_amount * ls * _color;
+		if (world.hit_shadow(shadow_ray, interval(0.0f, 100.0f))) {
+			return min_amount * ls * hr.m->ka;
 		} else {
-			return ls * _color;
+			return ls * hr.m->ka;
 		}
 	}
 

@@ -1,3 +1,6 @@
+#ifndef __MULTI_JITTERED__
+#define __MULTI_JITTERED__
+
 #include "Sampler.h"
 
 class MultiJittered : public Sampler {
@@ -13,3 +16,5 @@ private:
 
     virtual void generate_samples() override;
 };
+
+#endif

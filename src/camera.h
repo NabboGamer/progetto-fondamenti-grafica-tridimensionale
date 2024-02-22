@@ -156,19 +156,7 @@ private:
     color refractColor = color(1.0f, 1.0f, 1.0f);
 
     if (world.hit(r, interval(0.0f, infinity), rec)){
-      ray shadow_ray(rec.p, unit_vector(worldlight.position - rec.p));
-      float closest_light = (rec.p - worldlight.position).length();
-
-      // Se ho colpito l'oggetto allora sparo un raggio nella direzione della luce
-      if (world.hit_shadow(shadow_ray, interval(0.01f, closest_light)))
-          // Se colpisce qualche oggetto restituisco la luce ambientale
-          colorFinal = ambient_shading(worldlight, rec);
-      else
-          // Se arriva a colpire la luce restituisco il colore calcolato con il metodo di Phong
-          // Questa riga commentata permette di attivare il Phong Shading
-          /*colorFinal = phong_shading(worldlight, rec, camera::camera_center);*/
-
-          colorFinal = ambient_occluder_ptr->compute_color(world, rec);
+      colorFinal = ambient_occluder_ptr->compute_color(world, rec);
     } else {
       vec3 unit_direction = unit_vector(r.direction());
       float t = 0.5f * (unit_direction.y() + 1.0f);
