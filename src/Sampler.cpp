@@ -96,5 +96,7 @@ point3 Sampler::sample_hemisphere() {
         jump = (rand_int() % num_sets) * num_samples;
     }
 
+    // L'operatore di post-incremento count++ viene utilizzato all'interno dell'espressione. 
+    // Ciò significa che count viene incrementato dopo che viene utilizzato nell'espressione.
     return hemisphere_samples[jump + shuffled_indices[jump + count++ % num_samples]];
 }

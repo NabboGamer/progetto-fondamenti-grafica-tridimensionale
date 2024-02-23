@@ -30,7 +30,7 @@ public:
 
     point3 sample_hemisphere(); // get next sample on unit hemisphere
 
-protected:
+public:
 
     int num_samples;                          // the number of sample points in a set
     int num_sets;                             // the number of sample sets

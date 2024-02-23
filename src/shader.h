@@ -22,9 +22,10 @@ inline bool refract(const vec3& v, const vec3& n, float ni_over_nt, vec3& refrac
 	if (discriminant > 0.0f) {
 		refracted = ni_over_nt * (d - n * dn) - n * sqrt(discriminant);
 		return true;
-	}
-	else
+	} else {
 		return false;
+	}
+		
 }
 
 color phong_shading(point_light& light, hit_record& hr, point3& camera_pos) {
@@ -48,9 +49,9 @@ color phong_shading(point_light& light, hit_record& hr, point3& camera_pos) {
 		specular = hr.m->ks * light.specular * VDotR;
 
 		return ambient + diffuse + specular;
-	}
-	else
+	} else {
 		return ambient;
+	}
 }
 
 color ambient_shading(point_light& light, hit_record& hr) {
@@ -80,26 +81,14 @@ public:
 		sampler_ptr->map_samples_to_hemisphere(1);
 	}
 
-	vec3 get_direction() {
+	vec3 get_direction(vec3 w, vec3 v, vec3 u) {
 		point3 sp = sampler_ptr->sample_hemisphere();
-		return sp.x() * u + sp.y() * w + sp.z() * v ;
-	}
-
-	bool in_shadow(const ray& ray, const hittable_list world) const {
-		int num_objects = world.objects.size();
-
-		for (int j = 0; j < num_objects; j++) {
-			if (world.objects[j]->hit_shadow(ray, interval(0.0f, infinity))) {
-				return true;
-			}
-		}
-
-		return false;
+		return sp.x() * u + sp.y() * v + sp.z() * w;
 	}
 
 	color compute_color(const hittable_list world, hit_record& hr) {
 		vec3 w = hr.normal;
-		// Il vettore 'up' è leggermente jittered(ovvero gli viene agggiunto del rumore, è agitato letteralmente)
+		// Il vettore 'up' è leggermente jittered(ovvero gli viene aggiunto del rumore, è agitato letteralmente)
 		// poichè nel caso in cui la normale sia verticale questo aiuta a ottenere un effetto maggiormente realistico
 		vec3 v = cross(w, vec3(0.0072, 1.0f, 0.0034));
 		v = unit_vector(v);
@@ -107,23 +96,20 @@ public:
 
 		ray shadow_ray;
 		shadow_ray.o = hr.p;
-		shadow_ray.d = get_direction();
+		shadow_ray.d = get_direction(w, v, u);
 
-		if (world.hit_shadow(shadow_ray, interval(0.0f, 100.0f))) {
-			return min_amount * ls * hr.m->ka;
+		if (world.hit_shadow(shadow_ray, interval(0.0f, 10.0f))) {
+			return min_amount * hr.m->ka;
 		} else {
-			return ls * hr.m->ka;
+			return hr.m->ka;
 		}
 	}
 
 private:
-
-	float ls = 1.0f;
-	color _color = color(1.0f, 1.0f, 1.0f);
+	// Il miglior valore secondo l'autore del libro è: 
+	// 0.0 per mostare le differeze tra i vari metodi di sampling e 
+	// 0.25 per ottenere le immagini più realistiche
 	float min_amount = 0.0f;
-	vec3 u = vec3(1.0f, 0.0f, 0.0f);
-	vec3 v = vec3(0.0f, 1.0f, 0.0f);
-	vec3 w = vec3(0.0f, 0.0f, 1.0f);
 	Sampler* sampler_ptr = nullptr;
 
 };

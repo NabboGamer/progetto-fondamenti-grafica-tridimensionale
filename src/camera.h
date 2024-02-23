@@ -189,7 +189,7 @@ private:
 
     }
 
-    return colorFinal * (1.0f - rec.m->reflective) + reflectColor * (rec.m->reflective);
+    return colorFinal * (1.0f - rec.m->reflective) + (reflectColor * rec.m->reflective);
     //return colorFinal + (rec.m->reflective) * reflectColor;
 
     //return colorFinal*(1.0f - rec.m->reflective) + reflectColor * (rec.m->reflective) + refractColor * (rec.m->refractive);

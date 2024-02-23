@@ -63,16 +63,10 @@ int main(int argc, char* argv[]){
 	// World
 	hittable_list world;
 
-	int num_samples = 1;
+	int num_samples = 4;
 	MultiJittered* sample_ptr = new MultiJittered(num_samples);
 	AmbientOccluder* ambient_occluder_ptr = new AmbientOccluder();
 	ambient_occluder_ptr->set_sampler(sample_ptr);
-
-	/*cout << "Numero di samples: " << ambient_occluder_ptr->sampler_ptr->get_num_samples() << "\n";
-	auto hemisphere_samples = ambient_occluder_ptr->sampler_ptr->hemisphere_samples;
-	for (int i = 0; i < hemisphere_samples.size(); i++){
-		cout << "(" << hemisphere_samples[i].e[0] << "," << hemisphere_samples[i].e[1] << "," << hemisphere_samples[i].e[2] << ")\n";
-	}*/
 
 	plane* plane_model = new plane();
 	material* plane_material_model = new material(color(0.5f, 0.5f, 0.5f), color(0.5f, 0.5f, 0.5f), color(0.5f, 0.5f, 0.5f), 1.0f);
@@ -80,7 +74,7 @@ int main(int argc, char* argv[]){
 	world.add(plane_instance_ptr);
 
 	sphere* sphere_model = new sphere();
-	material* sphere_material_model = new material(color(0.8f, 0.6f, 0.1f), color(0.8f, 0.6f, 0.1f), color(0.8f, 0.6f, 0.1f), 1.0f);
+	material* sphere_material_model = new material(color(1.0f, 0.65f, 0.0f), color(1.0f, 0.65f, 0.0f), color(1.0f, 0.65f, 0.0f), 1.0f);
 	auto sphere_instance_ptr = make_shared<instance>(sphere_model, sphere_material_model);
 	sphere_instance_ptr->translate(0.0f, 1.0f, 0.0f);
 	world.add(sphere_instance_ptr);
@@ -95,7 +89,7 @@ int main(int argc, char* argv[]){
 
 	cam.aspect_ratio = 16.0f / 9.0f;
 	cam.image_width = 960;
-	cam.samples_per_pixel = 1;
+	cam.samples_per_pixel = 256;
 	cam.vfov = 20;
 
 	cam.initialize();
