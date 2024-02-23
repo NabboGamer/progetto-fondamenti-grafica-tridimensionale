@@ -98,7 +98,7 @@ public:
 		shadow_ray.o = hr.p;
 		shadow_ray.d = get_direction(w, v, u);
 
-		if (world.hit_shadow(shadow_ray, interval(0.0f, 10.0f))) {
+		if (world.hit_shadow(shadow_ray, interval(0.0f, 2.0f))) {
 			return min_amount * hr.m->ka;
 		} else {
 			return hr.m->ka;

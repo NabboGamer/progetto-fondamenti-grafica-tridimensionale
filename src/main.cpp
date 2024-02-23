@@ -20,6 +20,7 @@
 #include "color.h"
 #include "texture.h"
 #include "Multijittered.h"
+#include "Regular.h"
 
 const unsigned int MAX_RAY_DEPTH = 0;
 
@@ -63,7 +64,8 @@ int main(int argc, char* argv[]){
 	// World
 	hittable_list world;
 
-	int num_samples = 4;
+	int num_samples = 256;
+	//Regular* sample_ptr = new Regular(num_samples);
 	MultiJittered* sample_ptr = new MultiJittered(num_samples);
 	AmbientOccluder* ambient_occluder_ptr = new AmbientOccluder();
 	ambient_occluder_ptr->set_sampler(sample_ptr);
@@ -84,7 +86,7 @@ int main(int argc, char* argv[]){
 	point_light* worldlight = new point_light(light_position, lightgray, lightgray, lightgray);
 
 	camera cam;
-	cam.lookfrom = point3(10.0f, 5.0f, 10.0f);
+	cam.lookfrom = point3(10.0f, 5.0f, -5.0f);
 	cam.lookat = point3(0.0f, 0.5f, 0.0f);
 
 	cam.aspect_ratio = 16.0f / 9.0f;
