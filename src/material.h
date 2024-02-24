@@ -1,4 +1,6 @@
-#pragma once
+#ifndef MATERIAL_H
+#define MATERIAL_H
+
 #include "color.h"
 #include "light.h"
 #include "common.h"
@@ -36,6 +38,4 @@ public:
 	float refractive = 0.0;
 };
 
-
-
-	
+#endif

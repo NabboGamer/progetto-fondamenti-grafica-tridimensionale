@@ -1,4 +1,6 @@
-#pragma once
+#ifndef BVH_H
+#define BVH_H
+
 #include <iostream>
 #include <iostream>
 #include <time.h>
@@ -108,3 +110,4 @@ bvh_node::bvh_node(vector<instance *> &objs_vector, int i, int j) {
 	box = surrounding_box(box_left, box_right);
 }
 
+#endif

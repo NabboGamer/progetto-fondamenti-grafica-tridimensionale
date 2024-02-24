@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MAT4_H
+#define MAT4_H
 #include "vec3.h"
 
 class mat4 {
@@ -106,16 +107,4 @@ point3 multiply(const mat4& mat, const point3& p) {
 		mat.m[2][0] * p[0] + mat.m[2][1] * p[1] + mat.m[2][2] * p[2] + mat.m[2][3]));
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+#endif

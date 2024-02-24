@@ -76,9 +76,6 @@
     <ClInclude Include="geometry.h">
       <Filter>Header Files\Geometries</Filter>
     </ClInclude>
-    <ClInclude Include="sphere.h">
-      <Filter>Header Files\Geometries</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

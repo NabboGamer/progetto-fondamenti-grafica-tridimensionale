@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MESH_H
+#define MESH_H
 
 #include <vector>
 #include <cstdio>
@@ -246,3 +247,5 @@ bool mesh::hit_shadow(const ray& ray, float t_min, float t_max) const
 	}
 	return false;
 }
+
+#endif

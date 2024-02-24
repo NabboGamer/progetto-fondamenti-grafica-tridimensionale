@@ -147,7 +147,6 @@
     <ClInclude Include="Regular.h" />
     <ClInclude Include="Sampler.h" />
     <ClInclude Include="shader.h" />
-    <ClInclude Include="sphere.h" />
     <ClInclude Include="texture.h" />
     <ClInclude Include="tiny_obj_loader.h" />
     <ClInclude Include="vec3.h" />

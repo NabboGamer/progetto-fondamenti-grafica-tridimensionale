@@ -1,4 +1,6 @@
-#pragma once
+#ifndef TEXTURE_H
+#define TEXTURE_H
+
 #include <cmath>
 #include "SDL.h"
 #include "SDL_image.h"
@@ -73,6 +75,4 @@ color image_texture::value(float u, float v, const point3& p) const {
 	return color(blue, green, red);
 }
 
-
-
-
+#endif

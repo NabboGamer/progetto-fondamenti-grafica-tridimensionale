@@ -1,4 +1,6 @@
-#pragma once
+#ifndef RASTER_H
+#define RASTER_H
+
 #include <iostream>
 #include "SDL.h"
 #include "SDL_image.h"
@@ -145,3 +147,5 @@ bool saveScreenshotBMP(std::string filepath, SDL_Window* SDLWindow = window, SDL
 	std::cout << "Image saved." << "\n";
 	return true;
 }
+
+#endif

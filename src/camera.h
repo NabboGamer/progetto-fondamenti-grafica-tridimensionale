@@ -1,5 +1,6 @@
 #ifndef CAMERA_H
 #define CAMERA_H
+
 #include <windows.h>
 #include <ppl.h>
 #include <iostream>

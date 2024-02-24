@@ -1,4 +1,5 @@
-#pragma once
+#ifndef OBJECT_H
+#define OBJECT_H
 #include "vec3.h"
 #include "material.h"
 #include "ray.h"
@@ -14,3 +15,5 @@ public:
 
 	virtual bool bounding_box(aabb& box) const = 0;
 };
+
+#endif

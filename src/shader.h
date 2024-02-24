@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHADER_H
+#define SHADER_H
+
 #include <iostream>
 #include <time.h>
 #include <algorithm>
@@ -113,3 +115,5 @@ private:
 	Sampler* sampler_ptr = nullptr;
 
 };
+
+#endif

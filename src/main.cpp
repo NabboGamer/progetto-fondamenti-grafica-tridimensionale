@@ -9,7 +9,6 @@
 #include "ray.h"
 #include "geometry.h"
 #include "cylinder.h"
-#include "sphere.h"
 #include "hittable.h"
 #include "hittable_list.h"
 #include "instance.h"
@@ -60,16 +59,7 @@ void close() {
 	SDL_Quit();
 }
 
-int main(int argc, char* argv[]){
-	// World
-	hittable_list world;
-
-	int num_samples = 256;
-	//Regular* sample_ptr = new Regular(num_samples);
-	MultiJittered* sample_ptr = new MultiJittered(num_samples);
-	AmbientOccluder* ambient_occluder_ptr = new AmbientOccluder();
-	ambient_occluder_ptr->set_sampler(sample_ptr);
-
+void build_test_scene(hittable_list& world) {
 	plane* plane_model = new plane();
 	material* plane_material_model = new material(color(0.5f, 0.5f, 0.5f), color(0.5f, 0.5f, 0.5f), color(0.5f, 0.5f, 0.5f), 1.0f);
 	auto plane_instance_ptr = make_shared<instance>(plane_model, plane_material_model);
@@ -80,6 +70,19 @@ int main(int argc, char* argv[]){
 	auto sphere_instance_ptr = make_shared<instance>(sphere_model, sphere_material_model);
 	sphere_instance_ptr->translate(0.0f, 1.0f, 0.0f);
 	world.add(sphere_instance_ptr);
+}
+
+int main(int argc, char* argv[]){
+	// World
+	hittable_list world;
+
+	int num_samples = 256;
+	//Regular* sample_ptr = new Regular(num_samples);
+	MultiJittered* sample_ptr = new MultiJittered(num_samples);
+	AmbientOccluder* ambient_occluder_ptr = new AmbientOccluder();
+	ambient_occluder_ptr->set_sampler(sample_ptr);
+
+	build_test_scene(world);
 
 	color lightgray = color(0.75f, 0.75f, 0.75f);
 	point3 light_position(0.0f, 10.0f, 0.0f);
@@ -91,7 +94,7 @@ int main(int argc, char* argv[]){
 
 	cam.aspect_ratio = 16.0f / 9.0f;
 	cam.image_width = 960;
-	cam.samples_per_pixel = 256;
+	cam.samples_per_pixel = 1;
 	cam.vfov = 20;
 
 	cam.initialize();
@@ -107,7 +110,6 @@ int main(int argc, char* argv[]){
 	time(&start);
 
 	cam.parallel_render(world, *worldlight, ambient_occluder_ptr);
-	//cam.render(world, *worldlight);
 
 	time(&end);
 	double dif = difftime(end, start);

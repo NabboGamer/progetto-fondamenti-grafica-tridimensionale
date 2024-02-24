@@ -1,4 +1,6 @@
-#pragma once
+#ifndef AABB_H
+#define AABB_H
+
 #include "vec3.h"
 #include "ray.h"
 #include "common.h"
@@ -79,3 +81,4 @@ aabb surrounding_box(aabb box0, aabb box1) {
 	return aabb(small, big);
 }
 
+#endif
