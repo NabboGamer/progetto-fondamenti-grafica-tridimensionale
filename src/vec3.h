@@ -98,4 +98,12 @@ inline vec3 unit_vector(vec3 v) {
   return v / v.length();
 }
 
+inline float distance(const vec3& u, const vec3& v) {
+    float dx = u.e[0] - v.e[0];
+    float dy = u.e[1] - v.e[1];
+    float dz = u.e[2] - v.e[2];
+
+    return sqrt(dx * dx + dy * dy + dz * dz);
+}
+
 #endif

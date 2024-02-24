@@ -72,6 +72,33 @@ void build_test_scene(hittable_list& world) {
 	world.add(sphere_instance_ptr);
 }
 
+void build_Cornell_Box(hittable_list& world) {
+	// Material
+	material* white_material_model = new material(color(1.0f, 1.0f, 1.0f), color(1.0f, 1.0f, 1.0f), color(1.0f, 1.0f, 1.0f), 0.5f);
+	material* red_material_model = new material(color(1.0f, 0.0f, 0.0f), color(1.0f, 0.0f, 0.0f), color(1.0f, 0.0f, 0.0f), 0.5f);
+	material* green_material_model = new material(color(0.0f, 1.0f, 0.0f), color(0.0f, 1.0f, 0.0f), color(0.0f, 1.0f, 0.0f), 0.5f);
+	// Left Wall
+	quadrilateral* left_wall_model = new quadrilateral(point3(0.0f, 0.0f, 5.0f), point3(0.0f, 0.0f, 0.0f), point3(0.0f, 5.0f, 0.0f), point3(0.0f, 5.0f, 5.0f));
+	auto left_wall_instance_ptr = make_shared<instance>(left_wall_model, red_material_model);
+	world.add(left_wall_instance_ptr);
+	// Right Wall
+	quadrilateral* right_wall_model = new quadrilateral(point3(5.0f, 0.0f, 5.0f), point3(5.0f, 0.0f, 0.0f), point3(5.0f, 5.0f, 0.0f), point3(5.0f, 5.0f, 5.0f));
+	auto right_wall_instance_ptr = make_shared<instance>(right_wall_model, green_material_model);
+	world.add(right_wall_instance_ptr);
+	// Back Wall
+	quadrilateral* back_wall_model = new quadrilateral(point3(0.0f, 0.0f, 0.0f), point3(0.0f, 5.0f, 0.0f), point3(5.0f, 5.0f, 0.0f), point3(5.0f, 0.0f, 0.0f));
+	auto back_wall_instance_ptr = make_shared<instance>(back_wall_model, white_material_model);
+	world.add(back_wall_instance_ptr);
+	// Ceiling
+	quadrilateral* ceiling_model = new quadrilateral(point3(0.0f, 5.0f, 5.0f), point3(5.0f, 5.0f, 5.0f), point3(5.0f, 5.0f, 0.0f), point3(0.0f, 5.0f, 0.0f));
+	auto ceiling_instance_ptr = make_shared<instance>(ceiling_model, white_material_model);
+	world.add(ceiling_instance_ptr);
+	// Flooring
+	quadrilateral* flooring_model = new quadrilateral(point3(0.0f, 0.0f, 5.0f), point3(5.0f, 0.0f, 5.0f), point3(5.0f, 0.0f, 0.0f), point3(0.0f, 0.0f, 0.0f));
+	auto flooring_instance_ptr = make_shared<instance>(flooring_model, white_material_model);
+	world.add(flooring_instance_ptr);
+}
+
 int main(int argc, char* argv[]){
 	// World
 	hittable_list world;
@@ -82,19 +109,20 @@ int main(int argc, char* argv[]){
 	AmbientOccluder* ambient_occluder_ptr = new AmbientOccluder();
 	ambient_occluder_ptr->set_sampler(sample_ptr);
 
-	build_test_scene(world);
+	//build_test_scene(world);
+	build_Cornell_Box(world);
 
 	color lightgray = color(0.75f, 0.75f, 0.75f);
 	point3 light_position(0.0f, 10.0f, 0.0f);
 	point_light* worldlight = new point_light(light_position, lightgray, lightgray, lightgray);
 
 	camera cam;
-	cam.lookfrom = point3(10.0f, 5.0f, -5.0f);
-	cam.lookat = point3(0.0f, 0.5f, 0.0f);
+	cam.lookfrom = point3(2.5f, 2.6f, 20.0f);
+	cam.lookat = point3(2.5f, 2.5f, 2.5f);
 
 	cam.aspect_ratio = 16.0f / 9.0f;
 	cam.image_width = 960;
-	cam.samples_per_pixel = 1;
+	cam.samples_per_pixel = 16;
 	cam.vfov = 20;
 
 	cam.initialize();
