@@ -125,9 +125,10 @@ int main(int argc, char* argv[]){
 	// World
 	hittable_list world;
 
-	int num_samples = 1024;
+	int num_samples = 256;
+	int num_sets = 256;
 	//Regular* sample_ptr = new Regular(num_samples);
-	MultiJittered* sample_ptr = new MultiJittered(num_samples);
+	MultiJittered* sample_ptr = new MultiJittered(num_samples, num_sets);
 	AmbientOccluder* ambient_occluder_ptr = new AmbientOccluder();
 	ambient_occluder_ptr->set_sampler(sample_ptr);
 

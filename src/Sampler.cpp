@@ -11,7 +11,7 @@ Sampler::Sampler() : num_samples(1), num_sets(83), count(0), jump(0) {
     setup_shuffled_indices();
 }
 
-Sampler::Sampler(const int ns) : num_samples(ns), num_sets(1024), count(0), jump(0) {
+Sampler::Sampler(const int ns) : num_samples(ns), num_sets(83), count(0), jump(0) {
     samples.reserve(num_samples * num_sets);
     setup_shuffled_indices();
 }
@@ -99,4 +99,12 @@ point3 Sampler::sample_hemisphere() {
     // L'operatore di post-incremento count++ viene utilizzato all'interno dell'espressione. 
     // Ciò significa che count viene incrementato dopo che viene utilizzato nell'espressione.
     return hemisphere_samples[jump + shuffled_indices[jump + count++ % num_samples]];
+}
+
+point3 Sampler::sample_unit_square() {
+    if (count % num_samples == 0) {                    // start of a new pixel
+        jump = (rand_int() % num_sets) * num_samples;  // random index jump initialised to zero in constructor
+    }
+
+    return samples[jump + shuffled_indices[jump + count++ % num_samples]];
 }

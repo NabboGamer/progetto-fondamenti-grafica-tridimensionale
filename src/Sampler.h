@@ -30,6 +30,8 @@ public:
 
     point3 sample_hemisphere(); // get next sample on unit hemisphere
 
+    point3 sample_unit_square(); // get next sample on unit square
+
 public:
 
     int num_samples;                          // the number of sample points in a set
