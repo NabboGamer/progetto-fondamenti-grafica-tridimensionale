@@ -111,7 +111,7 @@ private:
 	// Il miglior valore secondo l'autore del libro è: 
 	// 0.0 per mostare le differeze tra i vari metodi di sampling e 
 	// 0.25 per ottenere le immagini più realistiche
-	float min_amount = 0.0f;
+	float min_amount = 0.25f;
 	Sampler* sampler_ptr = nullptr;
 
 };

@@ -77,37 +77,55 @@ void build_Cornell_Box(hittable_list& world) {
 	material* white_material_model = new material(color(1.0f, 1.0f, 1.0f), color(1.0f, 1.0f, 1.0f), color(1.0f, 1.0f, 1.0f), 0.5f);
 	material* red_material_model = new material(color(1.0f, 0.0f, 0.0f), color(1.0f, 0.0f, 0.0f), color(1.0f, 0.0f, 0.0f), 0.5f);
 	material* green_material_model = new material(color(0.0f, 1.0f, 0.0f), color(0.0f, 1.0f, 0.0f), color(0.0f, 1.0f, 0.0f), 0.5f);
+	material* dirty_white_material_model = new material(color(0.7f, 0.7f, 0.7f), color(0.7f, 0.7f, 0.7f), color(0.7f, 0.7f, 0.7f), 0.5f);
+	material* warm_white_material_model = new material(color(1.0f, 0.95f, 0.9f), color(1.0f, 0.95f, 0.9f), color(1.0f, 0.95f, 0.9f), 0.5f);
+	material* light_beige_material_model = new material(color(0.95f, 0.9f, 0.8f), color(0.95f, 0.9f, 0.8f), color(0.95f, 0.9f, 0.8f), 0.5f);
+
 	// Left Wall
-	quadrilateral* left_wall_model = new quadrilateral(point3(0.0f, 0.0f, 5.0f), point3(0.0f, 0.0f, 0.0f), point3(0.0f, 5.0f, 0.0f), point3(0.0f, 5.0f, 5.0f));
+	quadrilateral* left_wall_model = new quadrilateral(point3(0.0f, 0.0f, 10.0f), point3(0.0f, 0.0f, 0.0f), point3(0.0f, 10.0f, 0.0f), point3(0.0f, 10.0f, 10.0f));
 	auto left_wall_instance_ptr = make_shared<instance>(left_wall_model, red_material_model);
 	world.add(left_wall_instance_ptr);
 	// Right Wall
-	quadrilateral* right_wall_model = new quadrilateral(point3(5.0f, 0.0f, 5.0f), point3(5.0f, 0.0f, 0.0f), point3(5.0f, 5.0f, 0.0f), point3(5.0f, 5.0f, 5.0f));
+	quadrilateral* right_wall_model = new quadrilateral(point3(10.0f, 0.0f, 10.0f), point3(10.0f, 0.0f, 0.0f), point3(10.0f, 10.0f, 0.0f), point3(10.0f, 10.0f, 10.0f));
 	auto right_wall_instance_ptr = make_shared<instance>(right_wall_model, green_material_model);
 	world.add(right_wall_instance_ptr);
 	// Back Wall
-	quadrilateral* back_wall_model = new quadrilateral(point3(0.0f, 0.0f, 0.0f), point3(0.0f, 5.0f, 0.0f), point3(5.0f, 5.0f, 0.0f), point3(5.0f, 0.0f, 0.0f));
-	auto back_wall_instance_ptr = make_shared<instance>(back_wall_model, white_material_model);
+	quadrilateral* back_wall_model = new quadrilateral(point3(0.0f, 0.0f, 0.0f), point3(0.0f, 10.0f, 0.0f), point3(10.0f, 10.0f, 0.0f), point3(10.0f, 0.0f, 0.0f));
+	auto back_wall_instance_ptr = make_shared<instance>(back_wall_model, light_beige_material_model);
 	world.add(back_wall_instance_ptr);
 	// Ceiling
-	quadrilateral* ceiling_model = new quadrilateral(point3(0.0f, 5.0f, 5.0f), point3(5.0f, 5.0f, 5.0f), point3(5.0f, 5.0f, 0.0f), point3(0.0f, 5.0f, 0.0f));
-	auto ceiling_instance_ptr = make_shared<instance>(ceiling_model, white_material_model);
+	quadrilateral* ceiling_model = new quadrilateral(point3(0.0f, 10.0f, 10.0f), point3(10.0f, 10.0f, 10.0f), point3(10.0f, 10.0f, 0.0f), point3(0.0f, 10.0f, 0.0f));
+	auto ceiling_instance_ptr = make_shared<instance>(ceiling_model, light_beige_material_model);
 	world.add(ceiling_instance_ptr);
 	// Flooring
-	quadrilateral* flooring_model = new quadrilateral(point3(0.0f, 0.0f, 5.0f), point3(5.0f, 0.0f, 5.0f), point3(5.0f, 0.0f, 0.0f), point3(0.0f, 0.0f, 0.0f));
-	auto flooring_instance_ptr = make_shared<instance>(flooring_model, white_material_model);
+	quadrilateral* flooring_model = new quadrilateral(point3(0.0f, 0.0f, 10.0f), point3(10.0f, 0.0f, 10.0f), point3(10.0f, 0.0f, 0.0f), point3(0.0f, 0.0f, 0.0f));
+	auto flooring_instance_ptr = make_shared<instance>(flooring_model, light_beige_material_model);
 	world.add(flooring_instance_ptr);
 	// First Box
-	box* first_box_model = new box(point3(0.0f, 0.0f, 0.0f), point3(2.0f, 2.0f, 2.0f));
-	auto first_box_instance_ptr = make_shared<instance>(first_box_model, white_material_model);
+	box* first_box_model = new box(point3(2.0f, 0.0f, 2.0f), point3(5.0f, 6.5f, 5.0f));
+	auto first_box_instance_ptr = make_shared<instance>(first_box_model, light_beige_material_model);
+	first_box_instance_ptr->rotate_y(12.5);
+	first_box_instance_ptr->translate(vec3(-1.0f, 0.0f, 0.0f));
+	first_box_instance_ptr->translate(vec3(0.0f, 0.0f, 2.0f));
 	world.add(first_box_instance_ptr);
+	// Second Box
+	box* second_box_model = new box(point3(4.0f, 0.0f, 4.0f), point3(7.5f, 3.5f, 7.5f));
+	auto second_box_instance_ptr = make_shared<instance>(second_box_model, light_beige_material_model);
+	second_box_instance_ptr->rotate_y(-13);
+	second_box_instance_ptr->translate(vec3(2.25f, 0.0f, 0.0f));
+	second_box_instance_ptr->translate(vec3(0.0f, 0.0f, 0.5f));
+	world.add(second_box_instance_ptr);
+	// Area Light
+	quadrilateral* area_light_model = new quadrilateral(point3(4.0f, 9.999f, 6.0f), point3(6.0f, 9.999f, 6.0f), point3(6.0f, 9.999f, 4.0f), point3(4.0f, 9.999f, 4.0f));
+	auto area_light_instance_ptr = make_shared<instance>(area_light_model, warm_white_material_model);
+	world.add(area_light_instance_ptr);
 }
 
 int main(int argc, char* argv[]){
 	// World
 	hittable_list world;
 
-	int num_samples = 256;
+	int num_samples = 1024;
 	//Regular* sample_ptr = new Regular(num_samples);
 	MultiJittered* sample_ptr = new MultiJittered(num_samples);
 	AmbientOccluder* ambient_occluder_ptr = new AmbientOccluder();
@@ -121,12 +139,12 @@ int main(int argc, char* argv[]){
 	point_light* worldlight = new point_light(light_position, lightgray, lightgray, lightgray);
 
 	camera cam;
-	cam.lookfrom = point3(2.5f, 2.6f, 20.0f);
-	cam.lookat = point3(2.5f, 2.5f, 2.5f);
+	cam.lookfrom = point3(5.0f, 6.0f, 40.0f);
+	cam.lookat = point3(5.0f, 5.0f, 5.0f);
 
 	cam.aspect_ratio = 16.0f / 9.0f;
-	cam.image_width = 960;
-	cam.samples_per_pixel = 16;
+	cam.image_width = 1920;
+	cam.samples_per_pixel = 256;
 	cam.vfov = 20;
 
 	cam.initialize();
