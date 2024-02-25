@@ -97,6 +97,10 @@ void build_Cornell_Box(hittable_list& world) {
 	quadrilateral* flooring_model = new quadrilateral(point3(0.0f, 0.0f, 5.0f), point3(5.0f, 0.0f, 5.0f), point3(5.0f, 0.0f, 0.0f), point3(0.0f, 0.0f, 0.0f));
 	auto flooring_instance_ptr = make_shared<instance>(flooring_model, white_material_model);
 	world.add(flooring_instance_ptr);
+	// First Box
+	box* first_box_model = new box(point3(0.0f, 0.0f, 0.0f), point3(2.0f, 2.0f, 2.0f));
+	auto first_box_instance_ptr = make_shared<instance>(first_box_model, white_material_model);
+	world.add(first_box_instance_ptr);
 }
 
 int main(int argc, char* argv[]){

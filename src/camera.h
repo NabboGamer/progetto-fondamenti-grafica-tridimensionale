@@ -168,9 +168,9 @@ private:
 
       if (rec.m->reflective > 0){
         ray reflectRay;
-        reflectRay.d = reflect(-unit_vector(r.d), rec.normal);
-        reflectRay.o = rec.p;
-        reflectRay.o = reflectRay.at(0.01f);
+        reflectRay.set_direction(reflect(-unit_vector(r.d), rec.normal));
+        reflectRay.set_origin(rec.p);
+        reflectRay.set_origin(reflectRay.at(0.01f));
 
         reflectColor = ray_color(reflectRay, world, worldlight, depth + 1, ambient_occluder_ptr);
       }
@@ -178,8 +178,8 @@ private:
       if (rec.m->refractive > 0){
         ray refractRay;
         if (refract(-unit_vector(r.d), rec.normal, 1.51f, refractRay.d)){
-          refractRay.o = rec.p;
-          refractRay.o = refractRay.at(0.01f);
+          refractRay.set_origin(rec.p);
+          refractRay.set_origin(refractRay.at(0.01f));
 
           refractColor = ray_color(refractRay, world, worldlight, depth + 1, ambient_occluder_ptr);
         }

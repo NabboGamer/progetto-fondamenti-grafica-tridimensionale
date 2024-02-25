@@ -97,8 +97,8 @@ public:
 		vec3 u = cross(v, w);
 
 		ray shadow_ray;
-		shadow_ray.o = hr.p;
-		shadow_ray.d = get_direction(w, v, u);
+		shadow_ray.set_origin(hr.p);
+		shadow_ray.set_direction(get_direction(w, v, u));
 
 		if (world.hit_shadow(shadow_ray, interval(0.0f, 2.0f))) {
 			return min_amount * hr.m->ka;

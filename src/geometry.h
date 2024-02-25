@@ -6,6 +6,7 @@
 #include "vec3.h"
 #include "material.h"
 #include "hittable.h"
+#include <assert.h>
 
 class plane : public hittable {
 
@@ -224,6 +225,7 @@ class box : public hittable {
 public:
 
     box(const point3& min, const point3& max) {
+        assert(min < max);
         parameters[0] = min;
         parameters[1] = max;
     }
@@ -237,6 +239,10 @@ public:
         */
         float tmin, tmax, tymin, tymax, tzmin, tzmax;
 
+        /*std::cout << "Posizione pmin cubo: " << "(" << parameters[0].x() << "," << parameters[0].y() << "," << parameters[0].z() << ")" << std::endl;
+        std::cout << "Posizione pmax cubo: " << "(" << parameters[1].x() << "," << parameters[1].y() << "," << parameters[1].z() << ")" << std::endl;
+        std::cout << "Direzione inversa raggio: " << "(" << r.inv_direction.x() << "," << r.inv_direction.y() << "," << r.inv_direction.z() << ")" << std::endl;
+        std::cout << "Segni direzione inversa raggio: " << r.sign[0] << " " << r.sign[0] << " " << r.sign[0] << std::endl;*/
         tmin = (parameters[r.sign[0]].e[0] - r.o.e[0]) * r.inv_direction.e[0];
         tmax = (parameters[1 - r.sign[0]].e[0] - r.o.e[0]) * r.inv_direction.e[0];
         tymin = (parameters[r.sign[1]].e[1] - r.o.e[1]) * r.inv_direction.e[1];
@@ -308,7 +314,7 @@ public:
         *
         *   Il confronto con la epsilon è necessario quando si devono uguagliare dei float.
         */
-        const double epsilon = 1e-6;
+        const float epsilon = 1e-4;
         if (std::abs(p_intersection.e[0] - p_min.e[0]) < epsilon) {
             vec3 normal = point3(p_intersection.e[0] - 1, p_intersection.e[1], p_intersection.e[2]) - p_intersection;
             normal = unit_vector(normal);
@@ -320,7 +326,7 @@ public:
             return normal;
         }
         if (std::abs(p_intersection.e[2] - p_min.e[2]) < epsilon) {
-            vec3 normal = point3(p_intersection.e[0], p_intersection.e[1], p_intersection.e[2] + 1) - p_intersection;
+            vec3 normal = point3(p_intersection.e[0], p_intersection.e[1], p_intersection.e[2] - 1) - p_intersection;
             normal = unit_vector(normal);
             return normal;
         }
@@ -336,7 +342,7 @@ public:
             return normal;
         }
         if (std::abs(p_intersection.e[2] - p_max.e[2]) < epsilon) {
-            vec3 normal = point3(p_intersection.e[0], p_intersection.e[1], p_intersection.e[2] - 1) - p_intersection;
+            vec3 normal = point3(p_intersection.e[0], p_intersection.e[1], p_intersection.e[2] + 1) - p_intersection;
             normal = unit_vector(normal);
             return normal;
         }

@@ -31,8 +31,8 @@ public:
 	bool hit(const ray& r, interval ray_t, hit_record& rec) const override {
 		ray inv_ray;
 
-		inv_ray.o = multiply(inverse_matrix, r.o);
-		inv_ray.d = inverse_matrix * r.d;
+		inv_ray.set_origin(multiply(inverse_matrix, r.o));
+		inv_ray.set_direction(inverse_matrix * r.d);
 
 		if (hittable_ptr->hit(inv_ray, ray_t, rec)) {
 			rec.p = multiply(current_matrix, rec.p);
@@ -49,8 +49,8 @@ public:
 	bool hit_shadow(const ray& r, interval ray_t) const {
 		ray inv_ray;
 
-		inv_ray.o = multiply(inverse_matrix, r.o);
-		inv_ray.d = inverse_matrix * r.d;
+		inv_ray.set_origin(multiply(inverse_matrix, r.o));
+		inv_ray.set_direction(inverse_matrix * r.d);
 
 		if (hittable_ptr->hit_shadow(inv_ray, ray_t))
 			return true;

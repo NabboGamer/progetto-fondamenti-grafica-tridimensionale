@@ -30,6 +30,18 @@ public:
 		return d; 
 	}
 
+	void set_origin(point3 _origin) {
+		o = _origin;
+	}
+
+	void set_direction(vec3 _direction) {
+		d = _direction;
+		inv_direction = vec3(1 / d.x(), 1 / d.y(), 1 / d.z());
+		sign[0] = (inv_direction.x() < 0);
+		sign[1] = (inv_direction.y() < 0);
+		sign[2] = (inv_direction.z() < 0);
+	}
+
 	point3 at(float t) const { 
 		return o + t * d; 
 	}
