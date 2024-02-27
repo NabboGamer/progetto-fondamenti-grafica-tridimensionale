@@ -100,10 +100,10 @@ public:
 		shadow_ray.set_origin(hr.p);
 		shadow_ray.set_direction(get_direction(w, v, u));
 
-		if (world.hit_shadow(shadow_ray, interval(0.0f, 2.0f))) {
-			return min_amount * hr.m->ka;
+		if (world.hit_shadow(shadow_ray, interval(0.0f, infinity))) {
+			return (min_amount * hr.m->ka) + (min_amount * hr.m->texture->value(hr.u, hr.v, hr.p));
 		} else {
-			return hr.m->ka;
+			return (hr.m->ka) + hr.m->texture->value(hr.u, hr.v, hr.p);
 		}
 	}
 
@@ -111,7 +111,7 @@ private:
 	// Il miglior valore secondo l'autore del libro è: 
 	// 0.0 per mostare le differeze tra i vari metodi di sampling e 
 	// 0.25 per ottenere le immagini più realistiche
-	float min_amount = 0.25f;
+	float min_amount = 0.0f;
 	Sampler* sampler_ptr = nullptr;
 
 };

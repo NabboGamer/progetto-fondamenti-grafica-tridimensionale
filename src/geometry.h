@@ -137,6 +137,10 @@ public:
             rec.p = r.at(rec.t);
             vec3 outward_normal = normal;
             rec.set_face_normal(r, outward_normal);
+
+            barycentricCoordinates(rec.p, rec.u, rec.v);
+            mapToUnitSquare(rec.u, rec.v);
+            
             return true;
         }
     }
@@ -211,6 +215,31 @@ public:
         // Verifica se il determinante è vicino a zero (considerando una tolleranza)
         const double tolerance = 1e-10;
         return std::abs(det) < tolerance;
+    }
+
+    void barycentricCoordinates(const point3& point, float& u, float& v) const {
+        // Calcoliamo i vettori che definiscono il quadrilatero
+        point3 e0 = p_1 - p_0;
+        point3 e1 = p_3 - p_0;
+        point3 e2 = point - p_0;
+
+        // Calcoliamo i prodotti scalari
+        float dot00 = dot(e0, e0);
+        float dot01 = dot(e0, e1);
+        float dot02 = dot(e0, e2);
+        float dot11 = dot(e1, e1);
+        float dot12 = dot(e1, e2);
+
+        // Calcoliamo la matrice inversa
+        float invDenom = 1.0f / (dot00 * dot11 - dot01 * dot01);
+        u = (dot11 * dot02 - dot01 * dot12) * invDenom;
+        v = (dot00 * dot12 - dot01 * dot02) * invDenom;
+    }
+
+    // Funzione per mappare le coordinate baricentriche in [-1, 1]
+    void mapToUnitSquare(float& u, float& v) const {
+        u = 2.0f * u - 1.0f;
+        v = 2.0f * v - 1.0f;
     }
 
 private:

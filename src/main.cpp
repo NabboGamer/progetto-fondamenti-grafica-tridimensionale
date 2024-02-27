@@ -121,6 +121,28 @@ void build_Cornell_Box(hittable_list& world) {
 	world.add(area_light_instance_ptr);
 }
 
+void build_Compleat_Angler(hittable_list& world) {
+	// Flooring
+	quadrilateral* flooring_model = new quadrilateral(point3(0.0f, 0.0f, 10.0f), point3(2.0f, 0.0f, 10.0f), point3(2.0f, 0.0f, 0.0f), point3(0.0f, 0.0f, 0.0f));
+	material* flooring_material = new material();
+	flooring_material->texture = new checker_texture(new constant_texture(color(1.0f, 0.0f, 0.0f)), new constant_texture(color(1.0f, 1.0f, 0.0f)));
+	auto flooring_instance_ptr = make_shared<instance>(flooring_model, flooring_material);
+	world.add(flooring_instance_ptr);
+
+	material* sphere_material = new material(color(0.9f, 0.9f, 0.9f), color(0.9f, 0.9f, 0.9f), color(0.9f, 0.9f, 0.9f), 0.5f);
+	sphere_material->texture = new constant_texture(color(0.9f, 0.9f, 0.9f));
+	// First Sphere
+	sphere* first_sphere_model = new sphere(point3(0.5f, 0.4f, 8.5f), 0.25f);
+	auto first_sphere_instance_ptr = make_shared<instance>(first_sphere_model, sphere_material);
+	world.add(first_sphere_instance_ptr);
+
+	// Second Sphere
+	sphere* second_sphere_model = new sphere(point3(0.5f, 0.3f, 8.5f), 0.20f);
+	auto second_sphere_instance_ptr = make_shared<instance>(second_sphere_model, sphere_material);
+	second_sphere_instance_ptr->translate(0.3f, -0.05f, -0.3f);
+	world.add(second_sphere_instance_ptr);
+}
+
 int main(int argc, char* argv[]){
 	// World
 	hittable_list world;
@@ -133,15 +155,16 @@ int main(int argc, char* argv[]){
 	ambient_occluder_ptr->set_sampler(sample_ptr);
 
 	//build_test_scene(world);
-	build_Cornell_Box(world);
+	//build_Cornell_Box(world);
+	build_Compleat_Angler(world);
 
 	color lightgray = color(0.75f, 0.75f, 0.75f);
 	point3 light_position(0.0f, 10.0f, 0.0f);
 	point_light* worldlight = new point_light(light_position, lightgray, lightgray, lightgray);
 
-	camera cam;
-	cam.lookfrom = point3(5.0f, 6.0f, 40.0f);
-	cam.lookat = point3(5.0f, 5.0f, 5.0f);
+	camera cam; 
+	cam.lookfrom = point3(0.5f, 0.3f, 11.0f);
+	cam.lookat = point3(0.5f, 0.0f, 0.0f);
 
 	cam.aspect_ratio = 16.0f / 9.0f;
 	cam.image_width = 1920;

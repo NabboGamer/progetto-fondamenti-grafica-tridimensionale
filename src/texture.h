@@ -31,18 +31,23 @@ class checker_texture : public texture {
 public:
 	checker_texture() { }
 
-	checker_texture(texture *t0, texture *t1) : even(t0), odd(t1) { }
+	checker_texture(texture* t0, texture* t1) : even(t0), odd(t1) { }
 
 	virtual color value(float u, float v, const point3& p) const {
-		float sines = sin(2 * p[0]) * sin(2 * p[1]) * sin(2 * p[2]);
+		float tile_size = 40.0; // Regola la dimensione dei quadrati della scacchiera
+
+		// Calcola il valore a scacchiera in base a u e v
+		float sines = sin(tile_size * u) * sin(tile_size * v);
+
 		if (sines < 0)
 			return odd->value(u, v, p);
 		else
 			return even->value(u, v, p);
 	}
 
-	texture *odd;
-	texture *even;
+
+	texture* odd;
+	texture* even;
 };
 
 class image_texture : public texture {
