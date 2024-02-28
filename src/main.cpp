@@ -75,11 +75,22 @@ void build_test_scene(hittable_list& world) {
 void build_Cornell_Box(hittable_list& world) {
 	// Material
 	material* white_material_model = new material(color(1.0f, 1.0f, 1.0f), color(1.0f, 1.0f, 1.0f), color(1.0f, 1.0f, 1.0f), 0.5f);
+	white_material_model->texture = new constant_texture(color(1.0f, 1.0f, 1.0f));
+
 	material* red_material_model = new material(color(1.0f, 0.0f, 0.0f), color(1.0f, 0.0f, 0.0f), color(1.0f, 0.0f, 0.0f), 0.5f);
+	red_material_model->texture = new constant_texture(color(1.0f, 0.0f, 0.0f));
+
 	material* green_material_model = new material(color(0.0f, 1.0f, 0.0f), color(0.0f, 1.0f, 0.0f), color(0.0f, 1.0f, 0.0f), 0.5f);
+	green_material_model->texture = new constant_texture(color(0.0f, 1.0f, 0.0f));
+
 	material* dirty_white_material_model = new material(color(0.7f, 0.7f, 0.7f), color(0.7f, 0.7f, 0.7f), color(0.7f, 0.7f, 0.7f), 0.5f);
+	dirty_white_material_model->texture = new constant_texture(color(0.7f, 0.7f, 0.7f));
+
 	material* warm_white_material_model = new material(color(1.0f, 0.95f, 0.9f), color(1.0f, 0.95f, 0.9f), color(1.0f, 0.95f, 0.9f), 0.5f);
+	warm_white_material_model->texture = new constant_texture(color(1.0f, 0.95f, 0.9f));
+
 	material* light_beige_material_model = new material(color(0.95f, 0.9f, 0.8f), color(0.95f, 0.9f, 0.8f), color(0.95f, 0.9f, 0.8f), 0.5f);
+	light_beige_material_model->texture = new constant_texture(color(0.95f, 0.9f, 0.8f));
 
 	// Left Wall
 	quadrilateral* left_wall_model = new quadrilateral(point3(0.0f, 0.0f, 10.0f), point3(0.0f, 0.0f, 0.0f), point3(0.0f, 10.0f, 0.0f), point3(0.0f, 10.0f, 10.0f));
@@ -155,8 +166,8 @@ int main(int argc, char* argv[]){
 	ambient_occluder_ptr->set_sampler(sample_ptr);
 
 	//build_test_scene(world);
-	//build_Cornell_Box(world);
-	build_Compleat_Angler(world);
+	build_Cornell_Box(world);
+	//build_Compleat_Angler(world);
 
 	color lightgray = color(0.75f, 0.75f, 0.75f);
 	point3 light_position(0.0f, 10.0f, 0.0f);
