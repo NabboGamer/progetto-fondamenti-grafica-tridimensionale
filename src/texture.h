@@ -34,7 +34,7 @@ public:
 	checker_texture(texture* t0, texture* t1) : even(t0), odd(t1) { }
 
 	virtual color value(float u, float v, const point3& p) const {
-		float tile_size = 40.0; // Regola la dimensione dei quadrati della scacchiera
+		float tile_size = 500.0; // Regola la dimensione dei quadrati della scacchiera
 
 		// Calcola il valore a scacchiera in base a u e v
 		float sines = sin(tile_size * u) * sin(tile_size * v);

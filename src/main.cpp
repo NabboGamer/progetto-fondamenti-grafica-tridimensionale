@@ -156,7 +156,143 @@ void build_Compleat_Angler(hittable_list& world) {
 	world.add(second_sphere_instance_ptr);
 }
 
+void build_The_Juggler(hittable_list& world) {
+	// Flooring
+	quadrilateral* flooring_model = new quadrilateral(point3(-1000.0f, 0.0f, 1000.0f), point3(1000.0f, 0.0f, 1000.0f), point3(1000.0f, 0.0f, -1000.0f), point3(-1000.0f, 0.0f, -1000.0f));
+	material* flooring_material = new material();
+	flooring_material->texture = new checker_texture(new constant_texture(color(1.0f, 1.0f, 0.0f)), new constant_texture(color(0.0f, 1.0f, 0.0f)));
+	auto flooring_instance_ptr = make_shared<instance>(flooring_model, flooring_material);
+	world.add(flooring_instance_ptr);
 
+	material* sphere_material = new material(color(1.0f, 0.8f, 0.6f), color(1.0f, 0.8f, 0.6f), color(1.0f, 0.8f, 0.6f), 0.5f);
+	sphere_material->texture = new constant_texture(color(1.0f, 0.8f, 0.6f));
+	// Arts
+	sphere* right_leg_sphere_1_model = new sphere(point3(22.0f, 0.0f, 14.5f), 0.1f);
+	auto right_leg_sphere_1_instance_ptr = make_shared<instance>(right_leg_sphere_1_model, sphere_material);
+	world.add(right_leg_sphere_1_instance_ptr);
+	sphere* right_leg_sphere_2_model = new sphere(point3(22.0f, 0.3f, 14.5f), 0.2f);
+	auto right_leg_sphere_2_instance_ptr = make_shared<instance>(right_leg_sphere_2_model, sphere_material);
+	world.add(right_leg_sphere_2_instance_ptr);
+	sphere* right_leg_sphere_3_model = new sphere(point3(21.9f, 0.8f, 14.4f), 0.3f);
+	auto right_leg_sphere_3_instance_ptr = make_shared<instance>(right_leg_sphere_3_model, sphere_material);
+	world.add(right_leg_sphere_3_instance_ptr);
+	sphere* right_leg_sphere_4_model = new sphere(point3(21.8f, 1.4f, 14.3f), 0.3f);
+	auto right_leg_sphere_4_instance_ptr = make_shared<instance>(right_leg_sphere_4_model, sphere_material);
+	world.add(right_leg_sphere_4_instance_ptr);
+	sphere* right_leg_sphere_5_model = new sphere(point3(21.7f, 2.0f, 14.2f), 0.3f);
+	auto right_leg_sphere_5_instance_ptr = make_shared<instance>(right_leg_sphere_5_model, sphere_material);
+	world.add(right_leg_sphere_5_instance_ptr);
+	sphere* right_leg_sphere_6_model = new sphere(point3(21.6f, 2.6f, 14.1f), 0.3f);
+	auto right_leg_sphere_6_instance_ptr = make_shared<instance>(right_leg_sphere_6_model, sphere_material);
+	world.add(right_leg_sphere_6_instance_ptr);
+	sphere* right_leg_sphere_7_model = new sphere(point3(21.5f, 3.2f, 14.0f), 0.3f);
+	auto right_leg_sphere_7_instance_ptr = make_shared<instance>(right_leg_sphere_7_model, sphere_material);
+	world.add(right_leg_sphere_7_instance_ptr);
+	sphere* right_leg_sphere_8_model = new sphere(point3(21.4f, 3.8f, 13.9f), 0.3f);
+	auto right_leg_sphere_8_instance_ptr = make_shared<instance>(right_leg_sphere_8_model, sphere_material);
+	world.add(right_leg_sphere_8_instance_ptr);
+	sphere* right_leg_sphere_9_model = new sphere(point3(21.3f, 4.5f, 13.8f), 0.4f);
+	auto right_leg_sphere_9_instance_ptr = make_shared<instance>(right_leg_sphere_9_model, sphere_material);
+	world.add(right_leg_sphere_9_instance_ptr);
+	sphere* right_leg_sphere_10_model = new sphere(point3(21.4f, 5.1f, 13.9f), 0.3f);
+	auto right_leg_sphere_10_instance_ptr = make_shared<instance>(right_leg_sphere_10_model, sphere_material);
+	world.add(right_leg_sphere_10_instance_ptr);
+	sphere* right_leg_sphere_11_model = new sphere(point3(21.5f, 5.6f, 14.0f), 0.3f);
+	auto right_leg_sphere_11_instance_ptr = make_shared<instance>(right_leg_sphere_11_model, sphere_material);
+	world.add(right_leg_sphere_11_instance_ptr);
+	sphere* right_leg_sphere_12_model = new sphere(point3(21.6f, 6.1f, 14.1f), 0.3f);
+	auto right_leg_sphere_12_instance_ptr = make_shared<instance>(right_leg_sphere_12_model, sphere_material);
+	world.add(right_leg_sphere_12_instance_ptr);
+	sphere* right_leg_sphere_13_model = new sphere(point3(21.7f, 6.6f, 14.2f), 0.3f);
+	auto right_leg_sphere_13_instance_ptr = make_shared<instance>(right_leg_sphere_13_model, sphere_material);
+	world.add(right_leg_sphere_13_instance_ptr);
+	sphere* right_leg_sphere_14_model = new sphere(point3(21.8f, 7.1f, 14.3f), 0.3f);
+	auto right_leg_sphere_14_instance_ptr = make_shared<instance>(right_leg_sphere_14_model, sphere_material);
+	world.add(right_leg_sphere_14_instance_ptr);
+	sphere* right_leg_sphere_15_model = new sphere(point3(21.9f, 7.6f, 14.4f), 0.3f);
+	auto right_leg_sphere_15_instance_ptr = make_shared<instance>(right_leg_sphere_15_model, sphere_material);
+	world.add(right_leg_sphere_15_instance_ptr);
+	sphere* right_leg_sphere_16_model = new sphere(point3(22.0f, 8.1f, 14.5f), 0.3f);
+	auto right_leg_sphere_16_instance_ptr = make_shared<instance>(right_leg_sphere_16_model, sphere_material);
+	world.add(right_leg_sphere_16_instance_ptr);
+	sphere* left_leg_sphere_1_model = new sphere(point3(21.0f, 0.0f, 15.5f), 0.1f);
+	auto left_leg_sphere_1_instance_ptr = make_shared<instance>(left_leg_sphere_1_model, sphere_material);
+	world.add(left_leg_sphere_1_instance_ptr);
+	sphere* left_leg_sphere_2_model = new sphere(point3(21.0f, 0.3f, 15.5f), 0.2f);
+	auto left_leg_sphere_2_instance_ptr = make_shared<instance>(left_leg_sphere_2_model, sphere_material);
+	world.add(left_leg_sphere_2_instance_ptr);
+	sphere* left_leg_sphere_3_model = new sphere(point3(20.9f, 0.8f, 15.4f), 0.3f);
+	auto left_leg_sphere_3_instance_ptr = make_shared<instance>(left_leg_sphere_3_model, sphere_material);
+	world.add(left_leg_sphere_3_instance_ptr);
+	sphere* left_leg_sphere_4_model = new sphere(point3(20.8f, 1.4f, 15.3f), 0.3f);
+	auto left_leg_sphere_4_instance_ptr = make_shared<instance>(left_leg_sphere_4_model, sphere_material);
+	world.add(left_leg_sphere_4_instance_ptr);
+	sphere* left_leg_sphere_5_model = new sphere(point3(20.7f, 2.0f, 15.2f), 0.3f);
+	auto left_leg_sphere_5_instance_ptr = make_shared<instance>(left_leg_sphere_5_model, sphere_material);
+	world.add(left_leg_sphere_5_instance_ptr);
+	sphere* left_leg_sphere_6_model = new sphere(point3(20.6f, 2.6f, 15.1f), 0.3f);
+	auto left_leg_sphere_6_instance_ptr = make_shared<instance>(left_leg_sphere_6_model, sphere_material);
+	world.add(left_leg_sphere_6_instance_ptr);
+	sphere* left_leg_sphere_7_model = new sphere(point3(20.5f, 3.2f, 15.0f), 0.3f);
+	auto left_leg_sphere_7_instance_ptr = make_shared<instance>(left_leg_sphere_7_model, sphere_material);
+	world.add(left_leg_sphere_7_instance_ptr);
+	sphere* left_leg_sphere_8_model = new sphere(point3(20.4f, 3.8f, 14.9f), 0.3f);
+	auto left_leg_sphere_8_instance_ptr = make_shared<instance>(left_leg_sphere_8_model, sphere_material);
+	world.add(left_leg_sphere_8_instance_ptr);
+	sphere* left_leg_sphere_9_model = new sphere(point3(20.3f, 4.5f, 14.8f), 0.4f);
+	auto left_leg_sphere_9_instance_ptr = make_shared<instance>(left_leg_sphere_9_model, sphere_material);
+	world.add(left_leg_sphere_9_instance_ptr);
+	sphere* left_leg_sphere_10_model = new sphere(point3(20.4f, 5.1f, 14.9f), 0.3f);
+	auto left_leg_sphere_10_instance_ptr = make_shared<instance>(left_leg_sphere_10_model, sphere_material);
+	world.add(left_leg_sphere_10_instance_ptr);
+	sphere* left_leg_sphere_11_model = new sphere(point3(20.5f, 5.6f, 15.0f), 0.3f);
+	auto left_leg_sphere_11_instance_ptr = make_shared<instance>(left_leg_sphere_11_model, sphere_material);
+	world.add(left_leg_sphere_11_instance_ptr);
+	sphere* left_leg_sphere_12_model = new sphere(point3(20.6f, 6.1f, 15.1f), 0.3f);
+	auto left_leg_sphere_12_instance_ptr = make_shared<instance>(left_leg_sphere_12_model, sphere_material);
+	world.add(left_leg_sphere_12_instance_ptr);
+	sphere* left_leg_sphere_13_model = new sphere(point3(20.7f, 6.6f, 15.2f), 0.3f);
+	auto left_leg_sphere_13_instance_ptr = make_shared<instance>(left_leg_sphere_13_model, sphere_material);
+	world.add(left_leg_sphere_13_instance_ptr);
+	sphere* left_leg_sphere_14_model = new sphere(point3(20.8f, 7.1f, 15.3f), 0.3f);
+	auto left_leg_sphere_14_instance_ptr = make_shared<instance>(left_leg_sphere_14_model, sphere_material);
+	world.add(left_leg_sphere_14_instance_ptr);
+	sphere* left_leg_sphere_15_model = new sphere(point3(20.9f, 7.6f, 15.4f), 0.3f);
+	auto left_leg_sphere_15_instance_ptr = make_shared<instance>(left_leg_sphere_15_model, sphere_material);
+	world.add(left_leg_sphere_15_instance_ptr);
+	sphere* left_leg_sphere_16_model = new sphere(point3(21.0f, 8.1f, 15.5f), 0.3f);
+	auto left_leg_sphere_16_instance_ptr = make_shared<instance>(left_leg_sphere_16_model, sphere_material);
+	world.add(left_leg_sphere_16_instance_ptr);
+
+	material* sphere_2_material = new material(color(1.0f, 0.0f, 0.0f), color(1.0f, 0.0f, 0.0f), color(1.0f, 0.0f, 0.0f), 0.5f);
+	sphere_2_material->texture = new constant_texture(color(1.0f, 0.0f, 0.0f));
+	// Chest
+	sphere* chest_sphere_1_model = new sphere(point3(21.5f, 9.0f, 15.0f), 1.0f);
+	auto chest_sphere_1_instance_ptr = make_shared<instance>(chest_sphere_1_model, sphere_2_material);
+	world.add(chest_sphere_1_instance_ptr);
+	sphere* chest_sphere_2_model = new sphere(point3(21.5f, 11.0f, 15.0f), 2.0f);
+	auto chest_sphere_2_instance_ptr = make_shared<instance>(chest_sphere_2_model, sphere_2_material);
+	world.add(chest_sphere_2_instance_ptr);
+
+	// Neck
+	sphere* neck_sphere_1_model = new sphere(point3(21.5f, 13.2f, 15.0f), 0.5f);
+	auto neck_sphere_1_instance_ptr = make_shared<instance>(neck_sphere_1_model, sphere_material);
+	world.add(neck_sphere_1_instance_ptr);
+	// Head
+	sphere* head_sphere_1_model = new sphere(point3(21.5f, 14.5f, 15.0f), 1.0f);
+	auto head_sphere_1_instance_ptr = make_shared<instance>(head_sphere_1_model, sphere_material);
+	world.add(head_sphere_1_instance_ptr);
+
+	material* sphere_3_material = new material(color(0.0f, 0.0f, 1.0f), color(0.0f, 0.0f, 1.0f), color(0.0f, 0.0f, 1.0f), 0.5f);
+	sphere_3_material->texture = new constant_texture(color(0.0f, 0.0f, 1.0f));
+	// Eyes
+	sphere* eyes_sphere_1_model = new sphere(point3(21.5f, 15.0f, 14.0f), 0.25f);
+	auto eyes_sphere_1_instance_ptr = make_shared<instance>(eyes_sphere_1_model, sphere_3_material);
+	world.add(eyes_sphere_1_instance_ptr);
+	sphere* eyes_sphere_2_model = new sphere(point3(20.7f, 15.0f, 14.5f), 0.25f);
+	auto eyes_sphere_2_instance_ptr = make_shared<instance>(eyes_sphere_2_model, sphere_3_material);
+	world.add(eyes_sphere_2_instance_ptr);
+}
 
 int main(int argc, char* argv[]){
 	// World
@@ -169,21 +305,22 @@ int main(int argc, char* argv[]){
 	AmbientOccluder* ambient_occluder_ptr = new AmbientOccluder();
 	ambient_occluder_ptr->set_sampler(sample_ptr);
 
-	build_test_scene(world);
+	//build_test_scene(world);
 	//build_Cornell_Box(world);
 	//build_Compleat_Angler(world);
+	build_The_Juggler(world);
 
 	color lightgray = color(0.75f, 0.75f, 0.75f);
 	point3 light_position(0.0f, 10.0f, 0.0f);
 	point_light* worldlight = new point_light(light_position, lightgray, lightgray, lightgray);
 
 	camera cam; 
-	cam.lookfrom = point3(0.5f, 0.3f, 11.0f);
-	cam.lookat = point3(0.5f, 0.0f, 0.0f);
+	cam.lookfrom = point3(-50.0f, 25.0f, -50.0f);
+	cam.lookat = point3(21.5f, 15.0f, 15.0f);
 
 	cam.aspect_ratio = 16.0f / 9.0f;
 	cam.image_width = 1920;
-	cam.samples_per_pixel = 256;
+	cam.samples_per_pixel = 8;
 	cam.vfov = 20;
 
 	cam.initialize();
