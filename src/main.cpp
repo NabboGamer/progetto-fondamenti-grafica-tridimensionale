@@ -62,11 +62,13 @@ void close() {
 void build_test_scene(hittable_list& world) {
 	plane* plane_model = new plane();
 	material* plane_material_model = new material(color(0.5f, 0.5f, 0.5f), color(0.5f, 0.5f, 0.5f), color(0.5f, 0.5f, 0.5f), 1.0f);
+	plane_material_model->texture = new constant_texture(color(0.5f, 0.5f, 0.5f));
 	auto plane_instance_ptr = make_shared<instance>(plane_model, plane_material_model);
 	world.add(plane_instance_ptr);
 
 	sphere* sphere_model = new sphere();
 	material* sphere_material_model = new material(color(1.0f, 0.65f, 0.0f), color(1.0f, 0.65f, 0.0f), color(1.0f, 0.65f, 0.0f), 1.0f);
+	sphere_material_model->texture = new constant_texture(color(1.0f, 0.65f, 0.0f));
 	auto sphere_instance_ptr = make_shared<instance>(sphere_model, sphere_material_model);
 	sphere_instance_ptr->translate(0.0f, 1.0f, 0.0f);
 	world.add(sphere_instance_ptr);
@@ -154,6 +156,8 @@ void build_Compleat_Angler(hittable_list& world) {
 	world.add(second_sphere_instance_ptr);
 }
 
+
+
 int main(int argc, char* argv[]){
 	// World
 	hittable_list world;
@@ -165,8 +169,8 @@ int main(int argc, char* argv[]){
 	AmbientOccluder* ambient_occluder_ptr = new AmbientOccluder();
 	ambient_occluder_ptr->set_sampler(sample_ptr);
 
-	//build_test_scene(world);
-	build_Cornell_Box(world);
+	build_test_scene(world);
+	//build_Cornell_Box(world);
 	//build_Compleat_Angler(world);
 
 	color lightgray = color(0.75f, 0.75f, 0.75f);
