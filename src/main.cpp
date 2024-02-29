@@ -278,6 +278,7 @@ void build_The_Juggler(hittable_list& world) {
 	sphere* neck_sphere_1_model = new sphere(point3(21.5f, 13.2f, 15.0f), 0.5f);
 	auto neck_sphere_1_instance_ptr = make_shared<instance>(neck_sphere_1_model, sphere_material);
 	world.add(neck_sphere_1_instance_ptr);
+
 	// Head
 	sphere* head_sphere_1_model = new sphere(point3(21.5f, 14.5f, 15.0f), 1.0f);
 	auto head_sphere_1_instance_ptr = make_shared<instance>(head_sphere_1_model, sphere_material);
@@ -292,6 +293,110 @@ void build_The_Juggler(hittable_list& world) {
 	sphere* eyes_sphere_2_model = new sphere(point3(20.7f, 15.0f, 14.5f), 0.25f);
 	auto eyes_sphere_2_instance_ptr = make_shared<instance>(eyes_sphere_2_model, sphere_3_material);
 	world.add(eyes_sphere_2_instance_ptr);
+
+	// Arms
+	sphere* right_arm_sphere_1_model = new sphere(point3(19.5f, 12.0f, 15.5f), 0.3f);
+	auto right_arm_sphere_1_instance_ptr = make_shared<instance>(right_arm_sphere_1_model, sphere_material);
+	world.add(right_arm_sphere_1_instance_ptr);
+	sphere* right_arm_sphere_2_model = new sphere(point3(19.2f, 11.5f, 15.5f), 0.3f);
+	auto right_arm_sphere_2_instance_ptr = make_shared<instance>(right_arm_sphere_2_model, sphere_material);
+	world.add(right_arm_sphere_2_instance_ptr);
+	sphere* right_arm_sphere_3_model = new sphere(point3(18.9f, 11.0f, 15.5f), 0.3f);
+	auto right_arm_sphere_3_instance_ptr = make_shared<instance>(right_arm_sphere_3_model, sphere_material);
+	world.add(right_arm_sphere_3_instance_ptr);
+	sphere* right_arm_sphere_4_model = new sphere(point3(18.6f, 10.6f, 15.5f), 0.3f);
+	auto right_arm_4_instance_ptr = make_shared<instance>(right_arm_sphere_4_model, sphere_material);
+	world.add(right_arm_4_instance_ptr);
+	sphere* right_arm_sphere_5_model = new sphere(point3(18.3f, 10.1f, 15.5f), 0.3f);
+	auto right_arm_sphere_5_instance_ptr = make_shared<instance>(right_arm_sphere_5_model, sphere_material);
+	world.add(right_arm_sphere_5_instance_ptr);
+	sphere* right_arm_sphere_6_model = new sphere(point3(18.0f, 9.6f, 15.5f), 0.3f);
+	auto right_arm_sphere_6_instance_ptr = make_shared<instance>(right_arm_sphere_6_model, sphere_material);
+	world.add(right_arm_sphere_6_instance_ptr);
+	sphere* right_arm_sphere_7_model = new sphere(point3(17.7f, 9.1f, 15.5f), 0.3f);
+	auto right_arm_sphere_7_instance_ptr = make_shared<instance>(right_arm_sphere_7_model, sphere_material);
+	world.add(right_arm_sphere_7_instance_ptr);
+	sphere* right_arm_sphere_8_model = new sphere(point3(17.4f, 8.6f, 15.5f), 0.4f);
+	auto right_arm_sphere_8_instance_ptr = make_shared<instance>(right_arm_sphere_8_model, sphere_material);
+	world.add(right_arm_sphere_8_instance_ptr);
+	sphere* right_arm_sphere_9_model = new sphere(point3(17.4f, 8.6f, 14.9f), 0.3f);
+	auto right_arm_sphere_9_instance_ptr = make_shared<instance>(right_arm_sphere_9_model, sphere_material);
+	world.add(right_arm_sphere_9_instance_ptr);
+	sphere* right_arm_sphere_10_model = new sphere(point3(17.4f, 8.6f, 14.3f), 0.3f);
+	auto right_arm_sphere_10_instance_ptr = make_shared<instance>(right_arm_sphere_10_model, sphere_material);
+	world.add(right_arm_sphere_10_instance_ptr);
+	sphere* right_arm_sphere_11_model = new sphere(point3(17.4f, 8.6f, 13.7f), 0.3f);
+	auto right_arm_sphere_11_instance_ptr = make_shared<instance>(right_arm_sphere_11_model, sphere_material);
+	world.add(right_arm_sphere_11_instance_ptr);
+	sphere* right_arm_sphere_12_model = new sphere(point3(17.4f, 8.6f, 13.1f), 0.3f);
+	auto right_arm_sphere_12_instance_ptr = make_shared<instance>(right_arm_sphere_12_model, sphere_material);
+	world.add(right_arm_sphere_12_instance_ptr);
+	sphere* right_arm_sphere_13_model = new sphere(point3(17.4f, 8.6f, 12.5f), 0.3f);
+	auto right_arm_sphere_13_instance_ptr = make_shared<instance>(right_arm_sphere_13_model, sphere_material);
+	world.add(right_arm_sphere_13_instance_ptr);
+	sphere* right_arm_sphere_14_model = new sphere(point3(17.4f, 8.6f, 11.9f), 0.3f);
+	auto right_arm_sphere_14_instance_ptr = make_shared<instance>(right_arm_sphere_14_model, sphere_material);
+	world.add(right_arm_sphere_14_instance_ptr);
+	sphere* right_arm_sphere_15_model = new sphere(point3(17.4f, 8.6f, 11.3f), 0.3f);
+	auto right_arm_sphere_15_instance_ptr = make_shared<instance>(right_arm_sphere_15_model, sphere_material);
+	world.add(right_arm_sphere_15_instance_ptr);
+
+	sphere* left_arm_sphere_1_model = new sphere(point3(23.5f, 12.0f, 15.5f), 0.3f);
+	auto left_arm_sphere_1_instance_ptr = make_shared<instance>(left_arm_sphere_1_model, sphere_material);
+	world.add(left_arm_sphere_1_instance_ptr);
+	sphere* left_arm_sphere_2_model = new sphere(point3(23.8f, 11.4f, 15.5f), 0.3f);
+	auto left_arm_sphere_2_instance_ptr = make_shared<instance>(left_arm_sphere_2_model, sphere_material);
+	world.add(left_arm_sphere_2_instance_ptr);
+	sphere* left_arm_sphere_3_model = new sphere(point3(24.1f, 10.8f, 15.5f), 0.3f);
+	auto left_arm_sphere_3_instance_ptr = make_shared<instance>(left_arm_sphere_3_model, sphere_material);
+	world.add(left_arm_sphere_3_instance_ptr);
+	sphere* left_arm_sphere_4_model = new sphere(point3(24.4f, 10.2f, 15.5f), 0.3f);
+	auto left_arm_sphere_4_instance_ptr = make_shared<instance>(left_arm_sphere_4_model, sphere_material);
+	world.add(left_arm_sphere_4_instance_ptr);
+	sphere* left_arm_sphere_5_model = new sphere(point3(24.7f, 9.6f, 15.5f), 0.3f);
+	auto left_arm_sphere_5_instance_ptr = make_shared<instance>(left_arm_sphere_5_model, sphere_material);
+	world.add(left_arm_sphere_5_instance_ptr);
+	sphere* left_arm_sphere_6_model = new sphere(point3(25.0f, 9.0f, 15.5f), 0.3f);
+	auto left_arm_sphere_6_instance_ptr = make_shared<instance>(left_arm_sphere_6_model, sphere_material);
+	world.add(left_arm_sphere_6_instance_ptr);
+	sphere* left_arm_sphere_7_model = new sphere(point3(25.3f, 8.4f, 15.5f), 0.3f);
+	auto left_arm_sphere_7_instance_ptr = make_shared<instance>(left_arm_sphere_7_model, sphere_material);
+	world.add(left_arm_sphere_7_instance_ptr);
+	sphere* left_arm_sphere_8_model = new sphere(point3(25.6f, 7.8f, 15.5f), 0.4f);
+	auto left_arm_sphere_8_instance_ptr = make_shared<instance>(left_arm_sphere_8_model, sphere_material);
+	world.add(left_arm_sphere_8_instance_ptr);
+	sphere* left_arm_sphere_9_model = new sphere(point3(25.3f, 7.8f, 14.9f), 0.3f);
+	auto left_arm_sphere_9_instance_ptr = make_shared<instance>(left_arm_sphere_9_model, sphere_material);
+	world.add(left_arm_sphere_9_instance_ptr);
+	sphere* left_arm_sphere_10_model = new sphere(point3(25.3f, 7.8f, 14.3f), 0.3f);
+	auto left_arm_sphere_10_instance_ptr = make_shared<instance>(left_arm_sphere_10_model, sphere_material);
+	world.add(left_arm_sphere_10_instance_ptr);
+	sphere* left_arm_sphere_11_model = new sphere(point3(25.3f, 7.8f, 13.7f), 0.3f);
+	auto left_arm_sphere_11_instance_ptr = make_shared<instance>(left_arm_sphere_11_model, sphere_material);
+	world.add(left_arm_sphere_11_instance_ptr);
+	sphere* left_arm_sphere_12_model = new sphere(point3(25.3f, 7.8f, 13.1f), 0.3f);
+	auto left_arm_sphere_12_instance_ptr = make_shared<instance>(left_arm_sphere_12_model, sphere_material);
+	world.add(left_arm_sphere_12_instance_ptr);
+	sphere* left_arm_sphere_13_model = new sphere(point3(25.3f, 7.8f, 12.5f), 0.3f);
+	auto left_arm_sphere_13_instance_ptr = make_shared<instance>(left_arm_sphere_13_model, sphere_material);
+	world.add(left_arm_sphere_13_instance_ptr);
+	sphere* left_arm_sphere_14_model = new sphere(point3(25.3f, 7.8f, 11.9f), 0.3f);
+	auto left_arm_sphere_14_instance_ptr = make_shared<instance>(left_arm_sphere_14_model, sphere_material);
+	world.add(left_arm_sphere_14_instance_ptr);
+	sphere* left_arm_sphere_15_model = new sphere(point3(25.3f, 7.8f, 11.3f), 0.3f);
+	auto left_arm_sphere_15_instance_ptr = make_shared<instance>(left_arm_sphere_15_model, sphere_material);
+	world.add(left_arm_sphere_15_instance_ptr);
+
+	// Skittles 
+	sphere* skittle_sphere_1_model = new sphere(point3(25.3f, 10.8f, 10.5f), 1.5f);
+	auto skittle_sphere_1_instance_ptr = make_shared<instance>(skittle_sphere_1_model, sphere_3_material);
+	world.add(skittle_sphere_1_instance_ptr);
+	sphere* skittle_sphere_2_model = new sphere(point3(17.4f, 11.6f, 10.5f), 1.5f);
+	auto skittle_sphere_2_instance_ptr = make_shared<instance>(skittle_sphere_2_model, sphere_3_material);
+	world.add(skittle_sphere_2_instance_ptr);
+	sphere* skittle_sphere_3_model = new sphere(point3(21.35f, 17.0f, 10.5f), 1.5f);
+	auto skittle_sphere_3_instance_ptr = make_shared<instance>(skittle_sphere_3_model, sphere_3_material);
+	world.add(skittle_sphere_3_instance_ptr);
 }
 
 int main(int argc, char* argv[]){
@@ -315,12 +420,12 @@ int main(int argc, char* argv[]){
 	point_light* worldlight = new point_light(light_position, lightgray, lightgray, lightgray);
 
 	camera cam; 
-	cam.lookfrom = point3(-50.0f, 25.0f, -50.0f);
-	cam.lookat = point3(21.5f, 15.0f, 15.0f);
+	cam.lookfrom = point3(-30.0f, 15.0f, -30.0f);
+	cam.lookat = point3(21.5f, 10.0f, 15.0f);
 
 	cam.aspect_ratio = 16.0f / 9.0f;
 	cam.image_width = 1920;
-	cam.samples_per_pixel = 8;
+	cam.samples_per_pixel = 256;
 	cam.vfov = 20;
 
 	cam.initialize();
